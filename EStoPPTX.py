@@ -59,8 +59,10 @@ class EStoPptxData:
 
         self.data = pd.DataFrame()
         self.data = eurostat.get_data_df(code=self.code,filter_pars=self.filter)
-        self.raw_data=self.data.copy() # pyright: ignore[reportOptionalMemberAccess]
-        #this copy holds the raw data as downloaded, it ist not effected by further processing
+        self.raw_data=self.data.copy()
+
+        # pyright: ignore[reportOptionalMemberAccess]
+        # this copy holds the raw data as downloaded, it ist not effected by further processing
 
         self.cols = self.data.columns.values.tolist()
         self.split_idx = next((i for i, col in enumerate(iterable=self.cols) if "\\" in col), len(self.cols))
