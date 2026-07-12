@@ -14,7 +14,7 @@ if __name__ == "__main__":
 
     if len(sys.argv) < 2:
         print("sys.argv: ", sys.argv)
-        logger.info("Bitte ziehe eine Datei auf dieses Script.  : {sys.argv[1]}")
+        logger.info("Bitte ziehe eine Datei auf dieses Script.  : %s", sys.argv[0])
         sys.exit(1)
 
     filepath = sys.argv[1]
@@ -23,7 +23,7 @@ if __name__ == "__main__":
     if os.path.exists(filepath):
         prs = prc.PPTXdataPresentation(filepath)
         # 'r'D:\01 Nextcloud\Documents\Programmieren\Powerpoint Generator\Powerpoint\Output 2025-02.pptx''
-        logger.info ("Reader %{filepath} gestartet")
+        logger.info ("Reader %s gestartet", filepath)
         logger.info('slides: %d', len(prs.slides))
 
         prs.update_charts()
