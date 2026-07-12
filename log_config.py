@@ -15,7 +15,7 @@ def set_log(logfile: str, level = logging.INFO):
     if logger.handlers:
         return logger
 
-    # Make sure the directory and logfile exists if not create gthe loggfile in the current directory
+    # Make sure the log directory and the logfile exists if not create the log file in the current directory
     logdir = os.path.dirname(logfile)
     if logdir and not os.path.exists(logdir):
         os.makedirs(logdir)

@@ -1,5 +1,6 @@
 import sys
 import os
+import datetime as dtm
 import logging
 import log_config
 import PPTXreaderClass as prc
@@ -13,12 +14,12 @@ if __name__ == "__main__":
     logger.info('Logging von pptxaktualisieren main  gestartet')
 
     if len(sys.argv) < 2:
-        print("sys.argv: ", sys.argv)
-        logger.info("Bitte ziehe eine Datei auf dieses Script.  : %s", sys.argv[0])
-        sys.exit(1)
-
-    filepath = sys.argv[1]
-    logger.info ("original file: %s", filepath)
+        print("No presentation given, using default:", "data/Default INPR.pptx")
+        logger.info("No presentation given, using default:  : %s", sys.argv[0])
+        filepath = "data/Default INPR.pptx"
+    else:
+        filepath = sys.argv[1]
+        logger.info ("original file: %s", filepath)
 
     if os.path.exists(filepath):
         prs = prc.PPTXdataPresentation(filepath)
@@ -27,7 +28,6 @@ if __name__ == "__main__":
         logger.info('slides: %d', len(prs.slides))
 
         prs.update_charts()
-
-        prs.save(filepath)
+        prs.save(os.path.join(os.path.dirname(filepath), dtm.datetime.now().strftime("_%Y-%m-%d_%H-%M-%S") + os.path.basename(filepath)))
     else:
         logger.info("Die Datei existiert nicht.")
