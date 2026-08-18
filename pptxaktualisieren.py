@@ -4,7 +4,7 @@ import datetime as dtm
 import logging
 import log_config
 import PPTXreaderClass as prc
-import EStoPPTX as esi
+#import EStoPPTX as esi
 
 
 if __name__ == "__main__":
