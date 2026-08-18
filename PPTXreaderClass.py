@@ -68,7 +68,7 @@ class PPTXdataPresentation:
                         '''
 
 
-                        #logging.info("received parameters: %s", sld.pars)
+                        logging.info("received parameters: %s", sld.pars)
 
                         # Create an object of the EStoPptxData class with the found parameters
                         T = esi.EStoPptxData(sld.pars)

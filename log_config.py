@@ -25,6 +25,7 @@ def set_log(logfile: str, level = logging.INFO):
     # File Handler
     fh = RotatingFileHandler(logfile, mode="w" , maxBytes=5*1024*1024, backupCount=2, encoding="utf-8")
     fh.setFormatter(formatter)
+    print(f"Logging to file: {logfile}")
     logger.addHandler(fh)
     return logger
 

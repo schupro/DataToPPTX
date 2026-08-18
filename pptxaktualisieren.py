@@ -11,7 +11,6 @@ if __name__ == "__main__":
 
     log_config.set_log("logs/pptxaktualisieren.log")
     logger = logging.getLogger(__name__)
-    logger.info('Logging von pptxaktualisieren main  gestartet')
 
     if len(sys.argv) < 2:
         print("No presentation given, using default:", "data/Default INPR.pptx")
