@@ -14,7 +14,7 @@ if __name__ == "__main__":
 
     if len(sys.argv) < 2:
         print("No presentation given, using default:")
-        logger.info("No presentation given, using default:  data/Default INPR.pptx", sys.argv[0])
+        logger.info("No presentation given, using default: %s", sys.argv[0])
         filepath = "data/Default INPR.pptx"
     else:
         filepath = sys.argv[1]
