@@ -13,9 +13,9 @@ if __name__ == "__main__":
     logger.info("Started by drag an drop exe file:")
 
     if len(sys.argv) < 2:
-        print("No presentation given, using default:")
-        logger.info("No presentation given, using default: %s", sys.argv[0])
         filepath = "data/Default INPR.pptx"
+        print("No presentation given, using default:")
+        logger.info("No presentation given, %s is using default %s" % (sys.argv[0], filepath))
     else:
         filepath = sys.argv[1]
         logger.info ("Original file: %s", filepath)
@@ -28,5 +28,6 @@ if __name__ == "__main__":
 
         prs.update_charts()
         prs.save(os.path.join(os.path.dirname(filepath), dtm.datetime.now().strftime("%Y-%m-%d_%H-%M-%S") + os.path.basename(filepath)))
+
     else:
         logger.info("Die Datei existiert nicht.")
