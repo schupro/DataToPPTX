@@ -18,7 +18,7 @@ if __name__ == "__main__":
         filepath = "data/Default INPR.pptx"
     else:
         filepath = sys.argv[1]
-        logger.info ("original file: %s", filepath)
+        logger.info ("Original file: %s", filepath)
 
     if os.path.exists(filepath):
         prs = prc.PPTXdataPresentation(filepath)
