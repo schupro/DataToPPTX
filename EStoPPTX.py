@@ -46,7 +46,7 @@ class EStoPptxData:
         self.lang = buffer.pop("lang")
         self.filter = buffer
         toc = eurostat.get_toc(dataset=self.code, lang=self.lang)
-        logging.info("TOC: %s, %s", toc[0], toc[1])
+        logger.info("TOC: %s, %s", toc[0], toc[1])
 
         self.meta_dict = dict(zip(toc[0], toc[1]))
         #print("der inhalt",self.meta_dict)

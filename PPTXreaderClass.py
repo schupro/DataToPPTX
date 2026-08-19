@@ -17,11 +17,12 @@ logger = logging.getLogger(__name__)
 class PPTXdataPresentation:
     def __init__(self, Filepath:str):
         self.prs = Presentation(pptx=Filepath)
-        logger.info("PPTXdataPresentation Objekt erstellt mit Filepath: %s", Filepath)
+        logger.info("PPTXdataPresentation Objekt erstellt")
+        logger.info("mit Filepath: %s", Filepath)
 
     @property
     def slides(self):
-        """PPTX slides iterator via property, so calling code can use prs.slides."""
+        '''PPTX slides iterator via property, so calling code can use prs.slides.'''
         return self.prs.slides
 
     '''This loop searches for slides holding Placeholders with charts.
@@ -38,27 +39,27 @@ class PPTXdataPresentation:
                 if pho.has_chart:
                     Chart = pho.chart
                     if sld.has_notes_slide:
-                        logging.info('notes found on sld: %d', sld.slide_id)
-                        logging.info('text found for query: %s', sld.notes_slide.notes_text_frame.text)
+                        logger.info('notes found on sld: %d', sld.slide_id)
+                        logger.info('text found for query: %s', sld.notes_slide.notes_text_frame.text)
                         sld.pars = dict()
                         for par in sld.notes_slide.notes_text_frame.paragraphs:
                             match par.text.split('=')[0].strip():
                                 case 'my_lang':
                                     my_lang =  par.text.split('=')[1]
                                     sld.pars['lang']=my_lang.strip()
-                                    logging.info('LANG:  %s', my_lang)
+                                    logger.info('LANG:  %s', my_lang)
                                 case 'my_code':
                                     my_code = par.text.split('=')[1]
                                     sld.pars['code']=my_code.strip()
-                                    logging.info('CODE:  %s', my_code)
+                                    logger.info('CODE:  %s', my_code)
                                 case 'my_pars':
                                     my_pars = eval((par.text.split('=')[1]))
                                     sld.pars.update(my_pars)
-                                    logging.info('FILTER:  %s', my_pars)
+                                    logger.info('FILTER:  %s', my_pars)
                                 case 'my_time':
                                     my_time = eval((par.text.split('=')[1]))
                                     sld.pars.update(my_time)
-                                    logging.info('TIME:  %s', my_time)
+                                    logger.info('TIME:  %s', my_time)
 
                         '''
                             Use the found parameters, to download the new data. Prepare the data to be inserted into the chart
@@ -68,7 +69,7 @@ class PPTXdataPresentation:
                         '''
 
 
-                        logging.info("received parameters: %s", sld.pars)
+                        logger.info("received parameters: %s", sld.pars)
 
                         # Create an object of the EStoPptxData class with the found parameters
                         T = esi.EStoPptxData(sld.pars)
