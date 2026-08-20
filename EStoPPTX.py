@@ -62,10 +62,11 @@ class EStoPptxData:
         self.raw_data=self.data.copy()
 
         # pyright: ignore[reportOptionalMemberAccess]
-        # this copy holds the raw data as downloaded, it ist not effected by further processing
+        # this copy holds the raw data as downloaded, it ist not affected by further processing
 
         self.cols = self.data.columns.values.tolist()
         self.split_idx = next((i for i, col in enumerate(iterable=self.cols) if "\\" in col), len(self.cols))
+
         '''
         split index (split_idx) counts the collumns until the heading contains the
          \\ character whicht marks the last collumn of the series parameters
