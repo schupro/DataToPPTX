@@ -131,7 +131,7 @@ if __name__ == "__main__":
                 "indic_bt": ["PRD"],
                 "nace_r2": ["C","D"],
                 "s_adj": ["NSA"],
-                "freq": ["M"],
+                "freq": ["M"],git
                 "unit": ["I21"],
                 "geo": ["DE", "AT"],
                 "startPeriod": "2025-08",
