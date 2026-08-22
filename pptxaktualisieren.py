@@ -24,6 +24,7 @@ if __name__ == "__main__":
         logger.info ("Reader %s staren", filepath)
         prs = prc.PPTXdataPresentation(filepath)
         prs.update_charts()
+        logger.info ("Charts updated:")
         prs.save(os.path.join(os.path.dirname(filepath), dtm.datetime.now().strftime("%Y-%m-%d_%H-%M-%S") + os.path.basename(filepath)))
 
     else:

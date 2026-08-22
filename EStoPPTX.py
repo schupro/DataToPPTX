@@ -103,6 +103,7 @@ class EStoPptxData:
                 self.data.pop(par)
                 # finally remove the par collumn from the data frame
 
+        logger.info("description: %s", self.descr)
         ''' Creates a PowerPoint Chart Data Object from the prepared data frame'''
         #self.data=self.data.drop(labels=self.params, axis=1,inplace=False)
         self.ChartData = CategoryChartData()  #create the data object for the PowerPoint Chart
@@ -132,7 +133,7 @@ if __name__ == "__main__":
                 "s_adj": ["NSA"],
                 "freq": ["M"],
                 "unit": ["I21"],
-                "geo": ["IT", "AT"],
+                "geo": ["DE", "AT"],
                 "startPeriod": "2025-08",
                 "endPeriod": "2025-09"}
     print("läuft")

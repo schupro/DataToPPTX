@@ -1,7 +1,7 @@
-import ast
+import os
 import logging
 import log_config
-import eurostat
+import datetime as dtm
 import EStoPPTX as esi
 from pptx import Presentation
 #from pptx.enum.shapes import MSO_SHAPE
@@ -15,6 +15,22 @@ logger = logging.getLogger(__name__)
 
 
 class PPTXdataPresentation:
+    """
+    scans a Powerpoint file for slides containing charts and their associated dataset descriptions
+    and calls the adequate ... toPPTX class to retrieve the data and update the chart.
+    (currentls only Eurostat is implemented)
+
+
+    searches all slides in  a power Point Presentation to find
+    slides holding Placeholders for charts, and a description
+    of the Eurostat dataset to be used for the chart in the notes placeholder.
+        If there is a chart, it checks the notes placeholder for a dataset code and a filter expression.
+        If they are found the Boolean 'Update' will be set to true and the Variable 'Chart'will be set
+        to the Chart which needs an update.
+        my_code holds the dataset-code and my_filter holds the filter expression to be used to retrieve the updated data.
+        For development purposes the function description prints some descriptions of the Chart.
+    """
+
     def __init__(self, Filepath:str):
         self.prs = Presentation(pptx=Filepath)
         logger.info("PPTXdataPresentation Objekt erstellt")
@@ -25,13 +41,6 @@ class PPTXdataPresentation:
         '''PPTX slides iterator via property, so calling code can use prs.slides.'''
         return self.prs.slides
 
-    '''This loop searches for slides holding Placeholders with charts.
-    If there is a chart, it checks the notes placeholder for a dataset code and a filter expression.
-    If they are found the Boolean 'Update' will be set to true and the Variable 'Chart'will be set
-    to the Chart which needs an update.
-    my_code holds the dataset-code and my_filter holds the filter expression to be used to retrieve the updated data.
-    For development purposes the function description prints some descriptions of the Chart.
-    '''
     def update_charts(self):
         for sld in self.prs.slides:
             for pho in sld.placeholders:
@@ -41,6 +50,7 @@ class PPTXdataPresentation:
                     if sld.has_notes_slide:
                         logger.info('notes found on sld: %d', sld.slide_id)
                         logger.info('text found for query: %s', sld.notes_slide.notes_text_frame.text)
+                        logger.info('Type of object found:')
                         sld.pars = dict()
                         for par in sld.notes_slide.notes_text_frame.paragraphs:
                             match par.text.split('=')[0].strip():
@@ -74,7 +84,7 @@ class PPTXdataPresentation:
                         # Create an object of the EStoPptxData class with the found parameters
                         T = esi.EStoPptxData(sld.pars)
                         #T = esi.EStoPptxData(goodpars)
-                        # print(type(Chart))
+                        logger.info("chart data: %s", T.ChartData)
 
                         #self.description(Chart, show=True)
                         Chart.replace_data(T.ChartData)
@@ -118,10 +128,10 @@ if __name__ == "__main__":
                 "lang": "de"}
     '''
     Update=False
-    filename = r'D:\01 Nextcloud\Documents\Programmieren\Powerpoint Generator\Powerpoint\Output Test1.pptx'
+    filename = r'D:\01 Nextcloud\Documents\Programmieren\Powerpoint Generator\Powerpoint\Output 2025-15.pptx'
     prs = PPTXdataPresentation(filename)
     logger.info ("reader gestartet%s", filename)
     logger.info('slides: %d', len(prs.slides))
     prs.update_charts()
-
+    prs.save(os.path.join(os.path.dirname(filename), dtm.datetime.now().strftime("%Y-%m-%d_%H-%M-%S") + os.path.basename(filename)))
     prs.save(filename)
