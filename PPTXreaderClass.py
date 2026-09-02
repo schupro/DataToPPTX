@@ -89,18 +89,17 @@ class PPTXdataPresentation:
                     Chart.replace_data(T.ChartData)
 
 
-        def description(cls, my_chart:'object of the chart type of the pptx library', show = False) -> None:
-            '''Prints the chart type of the object, its Titel and whether it has a legend'''
-            print('type: ', my_chart.chart_type)
+        def chart_des(cls, my_chart:'object of the chart type of the pptx library', show = False) -> None:
+            '''logs the chart type of the object, its Titel and whether it has a legend'''
+            logger.info('type: %s', my_chart.chart_type)
             if my_chart.has_title:
-                print('the chart has the titel: ', my_chart.title)
+                logger.info('the chart has the titel: %s', my_chart.tite)
             if my_chart.has_legend:
-                print('the chart has a Legend')
+                logger.info('the chart has a Legend')
             if (my_chart.chart_type == XL_CHART_TYPE.LINE):
-                print('Holding the following ',my_chart.series.count,' Lines')
+                logger.info('Holding the following %d Lines', my_chart.series.count)
             for L in my_chart.series:
-                print (L.name)
-
+                logger.info('Series name: %s', L.name)
 
     def save(self, Filepath:str):
         self.prs.save(Filepath)
