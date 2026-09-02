@@ -5,10 +5,10 @@ from pptx.enum.dml import MSO_COLOR_TYPE, MSO_THEME_COLOR
 from pptx.dml.color import RGBColor
 from pptx.util import Inches, Cm
 
-prs = Presentation("Leere Vorlage.pptx")
+prs = Presentation("Testpräsentation.pptx")
 
-#Presentation Analyser, 
-# Add a slide for every slide layout and 
+#Presentation Analyser,
+# Add a slide for every slide layout and
 # put the name and idx of the layout in the title
 
 for layout in prs.slide_layouts:
@@ -24,8 +24,8 @@ for slide in prs.slides:
         slds = [slide.slide_id, slide.slide_layout.name, prs.slide_layouts.index(layout)]
     else:
         slds = [slide.slide_id, "no Title"]
-    shds=[] 
-    for shape in slide.placeholders: 
+    shds=[]
+    for shape in slide.placeholders:
         shds.append([shape.placeholder_format.idx, shape.left, shape.top, shape.name])
     prds.append([slds,shds])
 
@@ -33,8 +33,8 @@ for slide in prs.slides:
 for slds in prds:
     sld = prs.slides.get(slds[0][0])
     sld.notes_slide.notes_text_frame.text = str(slds[0])
-   
-    for shds in slds[1]:        
+
+    for shds in slds[1]:
         ind = sld.shapes.add_textbox(shds[1],shds[2], 5000, 5000)
         ind.fill.solid()
         ind.fill.fore_color.rgb = RGBColor(255,255,0)

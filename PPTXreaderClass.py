@@ -16,7 +16,7 @@ logger = logging.getLogger(__name__)
 
 class PPTXdataPresentation:
     """
-    scans a Powerpoint file for slides containing charts and their associated dataset descriptions
+    Scans a Powerpoint file for slides containing charts and their associated dataset descriptions
     and calls the adequate ... toPPTX class to retrieve the data and update the chart.
     (currentls only Eurostat is implemented)
 
@@ -50,7 +50,6 @@ class PPTXdataPresentation:
                     if sld.has_notes_slide:
                         logger.info('notes found on sld: %d', sld.slide_id)
                         logger.info('text found for query: %s', sld.notes_slide.notes_text_frame.text)
-                        logger.info('Type of object found:')
                         sld.pars = dict()
                         for par in sld.notes_slide.notes_text_frame.paragraphs:
                             match par.text.split('=')[0].strip():
@@ -87,7 +86,7 @@ class PPTXdataPresentation:
                         logger.info("chart data: %s", T.ChartData)
 
                         #self.description(Chart, show=True)
-                        Chart.replace_data(T.ChartData)
+                    Chart.replace_data(T.ChartData)
 
 
         def description(cls, my_chart:'object of the chart type of the pptx library', show = False) -> None:
@@ -128,7 +127,7 @@ if __name__ == "__main__":
                 "lang": "de"}
     '''
     Update=False
-    filename = r'D:\01 Nextcloud\Documents\Programmieren\Powerpoint Generator\Powerpoint\Output 2025-15.pptx'
+    filename = r'D:\01 Nextcloud\Documents\Programmieren\Powerpoint Generator\Powerpoint\Output Test1.pptx'
     prs = PPTXdataPresentation(filename)
     logger.info ("reader gestartet%s", filename)
     logger.info('slides: %d', len(prs.slides))

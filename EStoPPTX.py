@@ -25,8 +25,8 @@ class EStoPptxData:
              par_code_n: filter_value name of the n_th.
                 parameter and the chosen ["values"] for missing
                 Parameter all versions are retourned
-             startPeriod: If no value, defaults to first available data point.
-             endPeriod:	If no value, defaults to last available data point
+             startPeriod: If no value is provided, it defaults to first available data point.
+             endPeriod:	If no value is provided, it defaults to last available data point
              data_frame:returns the data frame as it came from Eurostat
 
              params: returns the query params.
@@ -61,7 +61,6 @@ class EStoPptxData:
         self.data = eurostat.get_data_df(code=self.code,filter_pars=self.filter)
         self.raw_data=self.data.copy()
 
-        # pyright: ignore[reportOptionalMemberAccess]
         # this copy holds the raw data as downloaded, it ist not affected by further processing
 
         self.cols = self.data.columns.values.tolist()
@@ -99,7 +98,7 @@ class EStoPptxData:
                 # if there is more than one value ad a new collumn at the start of the dataset
                 # create a description for the series containing the TXT and the Parameter and
                 # the description for each item from the dictionary
-                self.data['name'] = self.data['name']+self.data[par].map(item_dict) + " (" + self.data[par] + ")"
+                self.data['name'] = self.data['name']+self.data[par].map(item_dict) + " (" + self.data[par] + ") "
                 self.data.pop(par)
                 # finally remove the par collumn from the data frame
 
@@ -121,7 +120,7 @@ if __name__ == "__main__":
     '''This is a test block it creates an object of the EStoPptxData class with a predefined parameter set
         and prints the results of the Eurostat data retrieval to a log file.'''
 
-    log_config.set_log("logs/PPTXRenew.log")
+    log_config.set_log("logs/EStoPPTX.log")
     logger = logging.getLogger(__name__)
     logger.info("Projektlog von EStopptx, start log gestartet")
 
@@ -131,7 +130,7 @@ if __name__ == "__main__":
                 "indic_bt": ["PRD"],
                 "nace_r2": ["C","D"],
                 "s_adj": ["NSA"],
-                "freq": ["M"],git
+                "freq": ["M"],
                 "unit": ["I21"],
                 "geo": ["DE", "AT"],
                 "startPeriod": "2025-08",
@@ -142,13 +141,7 @@ if __name__ == "__main__":
 
     cwd = Path.cwd()
     print(cwd)
-    # LogFile = cwd / "ESktoPPts.log"
-    #logging.basicConfig(filename= LogFile,
-                   #format='%(asctime)s %(levelname)s: %(message)s',
-                   #filemode='w')
 
-    #logger = logging.getLogger()
-    #logger.setLevel(logging.INFO)
     logger.info('Logging von EStoPPTX main  gestartet')
 
     # Hier wird ein Objekt der Klasse EStoPptxData mit den in my_pars definierten Parametern erstellt,
