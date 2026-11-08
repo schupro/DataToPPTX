@@ -21,7 +21,7 @@ if __name__ == "__main__":
         logger.info ("Original file: %s", filepath)
 
     if os.path.exists(filepath):
-        logger.info ("Reader %s staren", filepath)
+        logger.info ("start Reader on %s", filepath)
         prs = prc.PPTXdataPresentation(filepath)
         prs.update_charts()
         logger.info ("Charts updated:")
