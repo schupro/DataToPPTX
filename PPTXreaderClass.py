@@ -20,14 +20,13 @@ class PPTXdataPresentation:
     and calls the adequate ... toPPTX class to retrieve the data and update the chart.
     (currentls only Eurostat is implemented)
 
-
     searches all slides in  a power Point Presentation to find
-    slides holding Placeholders for charts, and a description
-    of the Eurostat dataset to be used for the chart in the notes placeholder.
-        If there is a chart, it checks the notes placeholder for a dataset code and a filter expression.
-        If they are found the Boolean 'Update' will be set to true and the Variable 'Chart'will be set
-        to the Chart which needs an update.
-        my_code holds the dataset-code and my_filter holds the filter expression to be used to retrieve the updated data.
+    slides holding Placeholders for charts.
+    If there is a chart, it checks the notes placeholder for a dataset code and a filter expression.
+    to allow the Download of an Eurostat dataset.
+        my_code holds the dataset-code and my_filter holds the filter expression to be used to
+        retrieve the updated data.
+        Source: gives the whole description of the dataset, as it is produced by the --
         For development purposes the function description prints some descriptions of the Chart.
     """
 
@@ -44,7 +43,6 @@ class PPTXdataPresentation:
     def update_charts(self):
         for sld in self.prs.slides:
             for pho in sld.placeholders:
-                # print("ja ich bin hier")
                 if pho.has_chart:
                     Chart = pho.chart
                     if sld.has_notes_slide:
