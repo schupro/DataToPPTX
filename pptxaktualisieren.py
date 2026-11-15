@@ -25,7 +25,7 @@ if __name__ == "__main__":
         prs = prc.PPTXdataPresentation(filepath)
         prs.update_charts()
         logger.info ("Charts updated:")
-        prs.save(os.path.join(os.path.dirname(filepath), dtm.datetime.now().strftime("%Y-%m-%d %H:%M:%S") + os.path.basename(filepath)))
-        logger.info ("File saved to %s", os.path.join(os.path.dirname(filepath), dtm.datetime.now().strftime("%Y-%m-%d %H:%M:%S") + os.path.basename(filepath)))
+        prs.save(os.path.join(os.path.dirname(filepath), dtm.datetime.now().strftime("%Y-%m-%d %H%M%S") + os.path.basename(filepath)))
+        logger.info ("File saved to %s", os.path.join(os.path.dirname(filepath), dtm.datetime.now().strftime("%Y-%m-%d %H%M%S") + os.path.basename(filepath)))
     else:
         logger.info("Die Datei existiert nicht.")
