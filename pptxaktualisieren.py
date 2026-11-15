@@ -14,7 +14,7 @@ if __name__ == "__main__":
 
     if len(sys.argv) < 2:
         filepath = "data/Default INPR.pptx"
-        print("No presentation given, using default:")
+        # print("No presentation given, using default:")
         logger.info("No presentation given, %s is using default %s" % (sys.argv[0], filepath))
     else:
         filepath = sys.argv[1]
@@ -25,7 +25,7 @@ if __name__ == "__main__":
         prs = prc.PPTXdataPresentation(filepath)
         prs.update_charts()
         logger.info ("Charts updated:")
-        prs.save(os.path.join(os.path.dirname(filepath), dtm.datetime.now().strftime("%Y-%m-%d_%H-%M-%S") + os.path.basename(filepath)))
-
+        prs.save(os.path.join(os.path.dirname(filepath), dtm.datetime.now().strftime("%Y-%m-%d %H:%M:%S") + os.path.basename(filepath)))
+        logger.info ("File saved to %s", os.path.join(os.path.dirname(filepath), dtm.datetime.now().strftime("%Y-%m-%d %H:%M:%S") + os.path.basename(filepath)))
     else:
         logger.info("Die Datei existiert nicht.")

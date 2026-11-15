@@ -128,16 +128,15 @@ if __name__ == "__main__":
                 "code": "STS_INPR_M",
                 "flags": False,
                 "indic_bt": ["PRD"],
-                "nace_r2": ["C","D"],
+                "nace_r2": ["C"],
                 "s_adj": ["NSA"],
                 "freq": ["M"],
                 "unit": ["I21"],
                 "geo": ["DE", "AT"],
                 "startPeriod": "2025-08",
-                "endPeriod": "2025-09"}
+                "endPeriod": "2026-09"
+            }
     print("läuft")
-
-
 
     cwd = Path.cwd()
     print(cwd)
